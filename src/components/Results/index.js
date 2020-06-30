@@ -1,46 +1,184 @@
 import React from "react";
 import moment from "moment";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
+
+import Button from "../Button";
 
 function Results() {
   const results = useStoreState((state) => state.defaultModel.results);
-  const resetSearch = useStoreActions(
-    (actions) => actions.defaultModel.resetSearch
+  const selectTypeValue = useStoreState(
+    (state) => state.defaultModel.selectTypeValue
   );
 
   return (
     <div className="Results">
-      <p className="bold">{results.name}</p>
-      <p>
-        <span className="bold-desc">Population:</span> {results.population}
-      </p>
-      <p>
-        <span className="bold-desc">Climat:</span> {results.climate}
-      </p>
-      <p>
-        <span className="bold-desc">Diamètre:</span> {results.diameter} km
-      </p>
-      <p>
-        <span className="bold-desc">Terrain:</span> {results.terrain}
-      </p>
-      <p>
-        <span className="bold-desc">Gravité:</span> {results.gravity}
-      </p>
-      <p>
-        <span className="bold-desc">Crée le:</span>{" "}
-        {moment(results.created).format("DD/MM/YYYY à HH:MM:SS")}
-      </p>
-      <p>
-        <span className="bold-desc">Édité le:</span>{" "}
-        {moment(results.edited).format("DD/MM/YYYY à HH:MM:SS")}
-      </p>
-      <p>
-        <span className="bold-desc">URL:</span>{" "}
-        <a href={results.url} target="_blank" rel="noopener noreferrer">
-          {results.url}
-        </a>
-      </p>
-      <button onClick={resetSearch}>Faire une nouvelle recherche</button>
+      {selectTypeValue === "planets" && (
+        <>
+          <p className="bold">{results.name}</p>
+          <p>
+            <span className="bold-desc">Population:</span> {results.population}
+          </p>
+          <p>
+            <span className="bold-desc">Climat:</span> {results.climate}
+          </p>
+          <p>
+            <span className="bold-desc">Diamètre:</span> {results.diameter} km
+          </p>
+          <p>
+            <span className="bold-desc">Terrain:</span> {results.terrain}
+          </p>
+          <p>
+            <span className="bold-desc">Gravité:</span> {results.gravity}
+          </p>
+          <p>
+            <span className="bold-desc">Crée le:</span>{" "}
+            {moment(results.created).format("DD/MM/YYYY à HH:MM:SS")}
+          </p>
+          <p>
+            <span className="bold-desc">Édité le:</span>{" "}
+            {moment(results.edited).format("DD/MM/YYYY à HH:MM:SS")}
+          </p>
+          <p>
+            <span className="bold-desc">URL:</span>{" "}
+            <a href={results.url} target="_blank" rel="noopener noreferrer">
+              {results.url}
+            </a>
+          </p>
+        </>
+      )}
+      {selectTypeValue === "films" && (
+        <>
+          <p className="bold">{results.title}</p>
+          <p>
+            <span className="bold-desc">Réalisateur:</span> {results.director}
+          </p>
+          <p>
+            <span className="bold-desc">Résumé:</span> {results.opening_crawl}
+          </p>
+          <p>
+            <span className="bold-desc">Date de sortie:</span>{" "}
+            {moment(results.release_date).format("DD/MM/YYYY")}
+          </p>
+          <p>
+            <span className="bold-desc">Crée le:</span>{" "}
+            {moment(results.created).format("DD/MM/YYYY à HH:MM:SS")}
+          </p>
+          <p>
+            <span className="bold-desc">Édité le:</span>{" "}
+            {moment(results.edited).format("DD/MM/YYYY à HH:MM:SS")}
+          </p>
+        </>
+      )}
+      {(selectTypeValue === "starships" || selectTypeValue === "vehicles") && (
+        <>
+          <p className="bold">{results.name}</p>
+          <p>
+            <span className="bold-desc">Modèle:</span> {results.model}
+          </p>
+          <p>
+            <span className="bold-desc">Passagers:</span> {results.passengers}
+          </p>
+          <p>
+            <span className="bold-desc">Fabricant:</span> {results.manufacturer}
+          </p>
+          <p>
+            <span className="bold-desc">Crée le:</span>{" "}
+            {moment(results.created).format("DD/MM/YYYY à HH:MM:SS")}
+          </p>
+          <p>
+            <span className="bold-desc">Édité le:</span>{" "}
+            {moment(results.edited).format("DD/MM/YYYY à HH:MM:SS")}
+          </p>
+        </>
+      )}
+      {selectTypeValue === "species" && (
+        <>
+          <p className="bold">{results.name}</p>
+          <p>
+            <span className="bold-desc">Langue:</span> {results.language}
+          </p>
+          <p>
+            <span className="bold-desc">Taille:</span> {results.average_height}
+            cm
+          </p>
+          <p>
+            <span className="bold-desc">Classification:</span>{" "}
+            {results.classification}
+          </p>
+          <p>
+            <span className="bold-desc">Espérance de vie:</span>{" "}
+            {results.average_lifespan}
+          </p>
+          <p>
+            <span className="bold-desc">Couleur de peau:</span>{" "}
+            {results.skin_colors}
+          </p>
+          <p>
+            <span className="bold-desc">Couleur de cheveux:</span>{" "}
+            {results.hair_colors}
+          </p>
+          <p>
+            <span className="bold-desc">Couleur des yeux:</span>{" "}
+            {results.eye_colors}
+          </p>
+          <p>
+            <span className="bold-desc">Date de sortie:</span>{" "}
+            {moment(results.release_date).format("DD/MM/YYYY")}
+          </p>
+          <p>
+            <span className="bold-desc">Crée le:</span>{" "}
+            {moment(results.created).format("DD/MM/YYYY à HH:MM:SS")}
+          </p>
+          <p>
+            <span className="bold-desc">Édité le:</span>{" "}
+            {moment(results.edited).format("DD/MM/YYYY à HH:MM:SS")}
+          </p>
+        </>
+      )}
+      {selectTypeValue === "people" && (
+        <>
+          <p className="bold">{results.name}</p>
+          <p>
+            <span className="bold-desc">Année de naissance:</span>{" "}
+            {results.birth_year}
+          </p>
+          <p>
+            <span className="bold-desc">Poids:</span> {results.mass}kg
+          </p>
+          <p>
+            <span className="bold-desc">Sexe:</span> {results.gender}
+          </p>
+          <p>
+            <span className="bold-desc">Couleur des yeux:</span>{" "}
+            {results.eye_color}
+          </p>
+          <p>
+            <span className="bold-desc">Couleur de peau:</span>{" "}
+            {results.skin_color}
+          </p>
+          <p>
+            <span className="bold-desc">Couleur de cheveux:</span>{" "}
+            {results.hair_color}
+          </p>
+          <p>
+            <span className="bold-desc">Couleur des yeux:</span>{" "}
+            {results.eye_color}
+          </p>
+          <p>
+            <span className="bold-desc">Crée le:</span>{" "}
+            {moment(results.created).format("DD/MM/YYYY à HH:MM:SS")}
+          </p>
+          <p>
+            <span className="bold-desc">Édité le:</span>{" "}
+            {moment(results.edited).format("DD/MM/YYYY à HH:MM:SS")}
+          </p>
+        </>
+      )}
+      <div className="Buttons">
+        {" "}
+        <Button type="new-search" value="Faire une nouvelle recherche" />
+        <Button type="logout" value="Se déconnecter" />
+      </div>
     </div>
   );
 }

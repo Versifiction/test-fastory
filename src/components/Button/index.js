@@ -14,23 +14,35 @@ function Button(props) {
   );
   const login = useStoreActions((actions) => actions.defaultModel.login);
   const logout = useStoreActions((actions) => actions.defaultModel.logout);
+  const resetSearch = useStoreActions(
+    (actions) => actions.defaultModel.resetSearch
+  );
 
   return (
     <div className="Button">
       {props.type === "search" && (
         <button
+          className="Button-Yellow"
           onClick={() => getResults({ selectTypeValue, inputValue, inWookie })}
         >
           {props.value}
         </button>
       )}
       {props.type === "login" && (
-        <button onClick={() => login({ username, password })}>
+        <button
+          className="Button-Yellow"
+          onClick={() => login({ username, password })}
+        >
           {props.value}
         </button>
       )}
       {props.type === "logout" && (
-        <button onClick={logout} className="Button-Disconnect">
+        <button onClick={logout} className="Button-Red Button-Disconnect">
+          {props.value}
+        </button>
+      )}
+      {props.type === "new-search" && (
+        <button onClick={resetSearch} className="Button-Yellow New-Search">
           {props.value}
         </button>
       )}

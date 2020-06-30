@@ -158,7 +158,7 @@ option {
   color: black;
 }
 
-button {
+.Button-Yellow {
   box-shadow: 0px 1px 0px 0px #fff6af;
   background: linear-gradient(to bottom, yellow 5%, #ffab23 100%);
   background-color: yellow;
@@ -176,12 +176,39 @@ button {
   text-shadow: 0px 1px 0px #ffee66;
 }
 
-button:hover {
+.Button-Yellow:hover {
   background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
   background-color: #ffab23;
 }
 
-button:active {
+.Button-Yellow:active {
+  position: relative;
+  top: 1px;
+}
+
+.Button-Red {
+  box-shadow: 0px 1px 0px 0px #fff6af;
+  background: linear-gradient(to bottom, red 5%, #ff4c4c 100%);
+  background-color: red;
+  border-radius: 2px;
+  border: 1px solid #ffaa22;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+  color: white;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 8px 26px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffee66;
+}
+
+.Button-Red:hover {
+  background: linear-gradient(to bottom, #ff4c4c 5%, red 100%);
+  background-color: #ff4c4c;
+}
+
+.Button-Red:active {
   position: relative;
   top: 1px;
 }
@@ -198,4 +225,13 @@ button:active {
 
 .red {
   color: red;
+}
+
+.Buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.Button-Disconnect {
+  margin-left: 4px;
 }

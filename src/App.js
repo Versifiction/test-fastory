@@ -50,7 +50,6 @@ function App() {
         </div>
       ) : (
         <>
-          <Button type="logout" value="Se déconnecter" />
           {!results ? (
             <div className="Form">
               <Subtitle value="Recherche" />
@@ -66,7 +65,7 @@ function App() {
             </div>
           ) : (
             <Results />
-          )}
+          )}{" "}
         </>
       )}
 
