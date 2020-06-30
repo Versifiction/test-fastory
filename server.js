@@ -1,21 +1,53 @@
 const Hapi = require("hapi");
+const HapiAxios = require("hapi-axios");
 
-// Create a server with a host and port
 const server = Hapi.server({
   host: "localhost",
   port: 8000,
 });
 
-// Add the route
 server.route({
   method: "GET",
   path: "/",
-  handler: (request, h) => {
-    return "hello world";
+  handler: (request, reply) => {
+    return "Hello World";
   },
 });
 
-// Start the server
+server.route({
+  method: "GET",
+  path: "/api/{type}/{id}",
+  handler: async (request, h) => {
+    const { swapi } = request.server.plugins["hapi-axios"];
+    const { data } = await swapi.get(
+      `${request.params.type}/${request.params.id}`
+    );
+
+    return h.response(data);
+  },
+});
+
+async function hapiAxiosConfig() {
+  try {
+    await server.register({
+      plugin: HapiAxios,
+      options: {
+        instances: [
+          {
+            name: "swapi",
+            axios: {
+              baseURL: "https://swapi.dev/api/",
+              // you can use any axios config here. https://github.com/axios/axios#creating-an-instance
+            },
+          },
+        ],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function start() {
   try {
     await server.start();
@@ -28,3 +60,4 @@ async function start() {
 }
 
 start();
+hapiAxiosConfig();
