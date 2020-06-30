@@ -1,10 +1,12 @@
 import React from "react";
 import { useStoreState } from "easy-peasy";
 
+import Title from "./components/Title";
 import Input from "./components/Input";
 import Select from "./components/Select";
 import Button from "./components/Button";
 import Results from "./components/Results";
+import Copyright from "./components/Copyright";
 import "./App.css";
 
 function App() {
@@ -12,15 +14,17 @@ function App() {
 
   return (
     <div className="App">
+      <Title />
       {!results ? (
-        <>
+        <div className="Form">
           <Input />
           <Select />
           <Button />
-        </>
+        </div>
       ) : (
         <Results />
       )}
+      <Copyright />
     </div>
   );
 }

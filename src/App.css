@@ -1,7 +1,36 @@
+html {
+  height: 100vh;
+}
+
 body {
   background-image: url("assets/images/bg-space.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100vh;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 3rem;
+}
+
+h1,
+p {
+  text-align: center;
+  color: yellow;
+}
+
+.Input,
+.Select,
+.Button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }

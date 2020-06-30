@@ -1,8 +1,7 @@
 import React from "react";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 
 function Input() {
-  const inputValue = useStoreState((state) => state.defaultModel.inputValue);
   const inputChange = useStoreActions(
     (actions) => actions.defaultModel.inputChange
   );

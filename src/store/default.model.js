@@ -1,19 +1,23 @@
-import { persist, action } from "easy-peasy";
+import { persist, action, thunk } from "easy-peasy";
 import axios from "axios";
 
 const defaultModel = {
   inputValue: "",
   selectValue: "",
   results: null,
-  getResults: action((state, payload) => {
-    console.log("payload ", payload);
-    const response = axios.get(
-      `http://localhost:8000/api/${payload.selectValue}/${payload.inputValue}`
-    );
-
-    console.log("response ", response);
-
-    state.results = response.data;
+  getResults: thunk(async (state, payload) => {
+    await axios
+      .get(
+        `http://localhost:8000/api/${payload.selectValue}/${payload.inputValue}`
+      )
+      .then((response) => {
+        console.log(response.data);
+        state.results = response.data;
+      })
+      .catch((err) => console.log(err));
+  }),
+  resetSearch: action((state, payload) => {
+    state.results = null;
   }),
   inputChange: action((state, payload) => {
     state.inputValue = payload;

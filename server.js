@@ -49,6 +49,13 @@ async function hapiAxiosConfig() {
 
 async function start() {
   try {
+    await server.register({
+      plugin: require("hapi-cors"),
+      options: {
+        origins: ["http://localhost:3000"],
+      },
+    });
+
     await server.start();
   } catch (err) {
     console.log(err);

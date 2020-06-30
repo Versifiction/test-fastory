@@ -11,6 +11,7 @@
     "easy-peasy": "^3.3.1",
     "hapi": "^18.1.0",
     "hapi-axios": "^1.0.0",
+    "hapi-cors": "^1.0.3",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

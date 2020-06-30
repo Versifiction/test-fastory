@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 
 function Select() {
   const [types] = useState([
@@ -11,7 +11,6 @@ function Select() {
     "vehicles",
   ]);
 
-  const selectValue = useStoreState((state) => state.defaultModel.selectValue);
   const selectChange = useStoreActions(
     (actions) => actions.defaultModel.selectChange
   );
@@ -22,7 +21,6 @@ function Select() {
         name="type"
         id="type-select"
         onChange={(e) => selectChange(e.target.value)}
-        value={selectValue}
       >
         <option value="">--Choisissez une option--</option>
         {types &&
