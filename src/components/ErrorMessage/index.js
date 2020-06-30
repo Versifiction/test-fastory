@@ -6,7 +6,7 @@ function ErrorMessage() {
 
   return (
     <div className="Error-Message">
-      <p className="red">{loginError}</p>
+      <p className="color-red">{loginError}</p>
     </div>
   );
 }

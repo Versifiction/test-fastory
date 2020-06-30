@@ -1,8 +1,4 @@
 html {
-  height: 100vh;
-}
-
-html {
   box-sizing: border-box;
   font-size: 10px;
 }
@@ -35,7 +31,8 @@ h6 {
 
 a {
   text-decoration: underline;
-  color: yellow;
+  color: black;
+  font-size: 2rem;
 }
 
 input,
@@ -60,11 +57,15 @@ body {
 }
 
 .App {
+  height: 100%;
+}
+
+.container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
   position: relative;
+  min-height: 100vh;
 }
 
 h1 {
@@ -80,14 +81,16 @@ h2 {
 }
 
 h1,
-h2,
-p {
+h2 {
+  font-weight: bold;
   text-align: center;
   color: yellow;
 }
 
 p {
   font-size: 1.5rem;
+  text-align: center;
+  color: yellow;
 }
 
 input::placeholder {
@@ -112,10 +115,15 @@ input::placeholder {
   margin: 0 auto;
   border-radius: 2px;
   padding: 1.4rem 2rem 1.6rem;
-  background: rgba(57, 63, 84, 0.8);
 }
 
-.Input:after,
+input,
+select {
+  color: white;
+  width: 360px !important;
+}
+
+/* .Input:after,
 .Select:after {
   content: "";
   position: absolute;
@@ -138,12 +146,11 @@ input::placeholder {
   );
   background-size: 500% auto;
   animation: gradient 3s linear infinite;
-}
+} */
 
 .Input input,
 .Select select {
   flex-grow: 1;
-  color: #bfd2ff;
   font-size: 1.8rem;
   line-height: 2.4rem;
   vertical-align: middle;
@@ -158,59 +165,11 @@ option {
   color: black;
 }
 
-.Button-Yellow {
-  box-shadow: 0px 1px 0px 0px #fff6af;
-  background: linear-gradient(to bottom, yellow 5%, #ffab23 100%);
+.btn-large {
   background-color: yellow;
-  border-radius: 2px;
-  border: 1px solid #ffaa22;
-  margin: 0 auto;
-  display: block;
-  cursor: pointer;
-  color: #333333;
-  font-family: Arial;
-  font-size: 15px;
+  color: black;
+  font-size: 1.5rem;
   font-weight: bold;
-  padding: 8px 26px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #ffee66;
-}
-
-.Button-Yellow:hover {
-  background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-  background-color: #ffab23;
-}
-
-.Button-Yellow:active {
-  position: relative;
-  top: 1px;
-}
-
-.Button-Red {
-  box-shadow: 0px 1px 0px 0px #fff6af;
-  background: linear-gradient(to bottom, red 5%, #ff4c4c 100%);
-  background-color: red;
-  border-radius: 2px;
-  border: 1px solid #ffaa22;
-  margin: 0 auto;
-  display: block;
-  cursor: pointer;
-  color: white;
-  font-family: Arial;
-  font-size: 15px;
-  padding: 8px 26px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #ffee66;
-}
-
-.Button-Red:hover {
-  background: linear-gradient(to bottom, #ff4c4c 5%, red 100%);
-  background-color: #ff4c4c;
-}
-
-.Button-Red:active {
-  position: relative;
-  top: 1px;
 }
 
 .bold {
@@ -219,11 +178,13 @@ option {
 }
 
 .bold-desc {
+  display: inline-block;
   font-weight: bold;
   font-size: 2rem;
+  margin-right: 4px;
 }
 
-.red {
+.color-red {
   color: red;
 }
 
@@ -234,4 +195,37 @@ option {
 
 .Button-Disconnect {
   margin-left: 4px;
+}
+
+nav {
+  background-color: transparent;
+}
+
+.material-icons {
+  color: yellow;
+  cursor: pointer;
+}
+
+.fa-long-arrow-right,
+.fa-long-arrow-left {
+  color: yellow;
+}
+
+.arrows {
+  display: flex;
+  justify-content: center;
+}
+
+.card-title {
+  text-align: center;
+  font-weight: bold !important;
+}
+
+.card-line {
+  display: block;
+  font-size: 2rem;
+}
+
+.card-content {
+  height: 275px;
 }

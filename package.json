@@ -13,10 +13,12 @@
     "hapi-axios": "^1.0.0",
     "hapi-bodyparser": "^2.1.2",
     "hapi-cors": "^1.0.3",
+    "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.27.0",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-paginate": "^6.3.2",
     "react-scripts": "3.4.1"
   },
   "scripts": {

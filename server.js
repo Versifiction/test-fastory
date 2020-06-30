@@ -44,10 +44,33 @@ server.route({
     let url;
     const { swapi } = request.server.plugins["hapi-axios"];
 
-    if (request.query.format === "wookiee") {
+    if (request.params.id && request.query.format === "wookiee") {
       url = `${request.params.type}/${request.params.id}/?format=wookiee`;
-    } else {
+    } else if (!request.params.id && request.query.format === "wookiee") {
+      url = `${request.params.type}/?format=wookiee`;
+    } else if (!request.params.id && !request.query.format === "wookiee") {
+      url = `${request.params.type}`;
+    } else if (request.params.id && !request.query.format) {
       url = `${request.params.type}/${request.params.id}`;
+    }
+
+    const { data } = await swapi.get(url);
+
+    return h.response(data);
+  },
+});
+
+server.route({
+  method: "GET",
+  path: "/api/list/{type}/{page?}",
+  handler: async (request, h) => {
+    let url;
+    const { swapi } = request.server.plugins["hapi-axios"];
+
+    if (request.params.type && request.query.format === "wookiee") {
+      url = `${request.params.type}/?page=${request.query.page}&format=wookiee`;
+    } else {
+      url = `${request.params.type}/?page=${request.query.page}`;
     }
 
     const { data } = await swapi.get(url);

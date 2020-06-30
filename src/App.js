@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useStoreState } from "easy-peasy";
+import M from "materialize-css";
 
+import Nav from "./components/Nav";
 import Title from "./components/Title";
 import Subtitle from "./components/Subtitle";
 import ErrorMessage from "./components/ErrorMessage";
@@ -24,52 +26,55 @@ function App() {
   const loginError = useStoreState((state) => state.defaultModel.loginError);
 
   useEffect(() => {
-    console.log(isAuthentified);
-  }, [isAuthentified]);
+    M.AutoInit();
+  });
 
   return (
     <div className="App">
-      <Title />
-      {!isAuthentified ? (
-        <div className="Form">
-          <Subtitle value="Connexion" />
-          <Input
-            type="text"
-            name="username"
-            value={username}
-            placeholder="Entrez le nom d'utilisateur"
-          />
-          <Input
-            type="text"
-            name="password"
-            value={password}
-            placeholder="Entrez le mot de passe"
-          />
-          {loginError !== "" && <ErrorMessage />}
-          <Button type="login" value="Se connecter" />
-        </div>
-      ) : (
-        <>
-          {!results ? (
-            <div className="Form">
-              <Subtitle value="Recherche" />
-              <Input
-                type="number"
-                name="id"
-                value={selectTypeValue}
-                placeholder="Entrez un ID"
-              />
-              <Select type="type" />
-              <Select type="wookie" />
-              <Button type="search" value="Rechercher" />
-            </div>
-          ) : (
-            <Results />
-          )}{" "}
-        </>
-      )}
+      <Nav />
+      <div className="container">
+        <Title />
+        {!isAuthentified ? (
+          <div className="Form">
+            <Subtitle value="Connexion" />
+            <Input
+              type="text"
+              name="username"
+              value={username}
+              placeholder="Entrez le nom d'utilisateur"
+            />
+            <Input
+              type="text"
+              name="password"
+              value={password}
+              placeholder="Entrez le mot de passe"
+            />
+            {loginError !== "" && <ErrorMessage />}
+            <Button type="login" value="Se connecter" />
+          </div>
+        ) : (
+          <>
+            {!results ? (
+              <div className="Form">
+                <Subtitle value="Recherche" />
+                <Input
+                  type="number"
+                  name="id"
+                  value={selectTypeValue}
+                  placeholder="Entrez un ID"
+                />
+                <Select type="type" />
+                <Select type="wookie" />
+                <Button type="search" value="Rechercher" />
+              </div>
+            ) : (
+              <Results />
+            )}{" "}
+          </>
+        )}
 
-      <Copyright />
+        <Copyright />
+      </div>
     </div>
   );
 }
