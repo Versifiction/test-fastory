@@ -9,7 +9,7 @@ const server = Hapi.server({
 server.route({
   method: "GET",
   path: "/",
-  handler: (request, reply) => {
+  handler: (request, h) => {
     return "Hello World";
   },
 });
@@ -37,7 +37,6 @@ async function hapiAxiosConfig() {
             name: "swapi",
             axios: {
               baseURL: "https://swapi.dev/api/",
-              // you can use any axios config here. https://github.com/axios/axios#creating-an-instance
             },
           },
         ],
