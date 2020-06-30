@@ -3,14 +3,19 @@ import { useStoreState, useStoreActions } from "easy-peasy";
 
 function Button() {
   const inputValue = useStoreState((state) => state.defaultModel.inputValue);
-  const selectValue = useStoreState((state) => state.defaultModel.selectValue);
+  const selectTypeValue = useStoreState(
+    (state) => state.defaultModel.selectTypeValue
+  );
+  const inWookie = useStoreState((state) => state.defaultModel.inWookie);
   const getResults = useStoreActions(
     (actions) => actions.defaultModel.getResults
   );
 
   return (
     <div className="Button">
-      <button onClick={() => getResults({ selectValue, inputValue })}>
+      <button
+        onClick={() => getResults({ selectTypeValue, inputValue, inWookie })}
+      >
         Rechercher
       </button>
     </div>

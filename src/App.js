@@ -18,7 +18,8 @@ function App() {
       {!results ? (
         <div className="Form">
           <Input />
-          <Select />
+          <Select type="type" />
+          <Select type="wookie" />
           <Button />
         </div>
       ) : (

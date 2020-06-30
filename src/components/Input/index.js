@@ -1,7 +1,8 @@
 import React from "react";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 function Input() {
+  const inputValue = useStoreState((state) => state.defaultModel.inputValue);
   const inputChange = useStoreActions(
     (actions) => actions.defaultModel.inputChange
   );
@@ -9,9 +10,12 @@ function Input() {
   return (
     <div className="Input">
       <input
-        type="text"
+        type="number"
+        min="1"
+        max="100"
         placeholder="Entrez un ID"
         onChange={(e) => inputChange(e.target.value)}
+        value={inputValue}
       />
     </div>
   );
