@@ -22,6 +22,7 @@ server.route({
       body: { merge: false, sanitizer: { stripNullorEmpty: false } },
     },
     handler: function (request, h) {
+      console.log("pay ", request.payload.payload);
       if (
         request.payload.payload.username === "Luke" &&
         request.payload.payload.password === "DadSucks"

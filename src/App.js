@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useStoreState } from "easy-peasy";
 
 import Title from "./components/Title";
+import Subtitle from "./components/Subtitle";
+import ErrorMessage from "./components/ErrorMessage";
 import Input from "./components/Input";
 import Select from "./components/Select";
 import Button from "./components/Button";
@@ -21,12 +23,16 @@ function App() {
   );
   const loginError = useStoreState((state) => state.defaultModel.loginError);
 
+  useEffect(() => {
+    console.log(isAuthentified);
+  }, [isAuthentified]);
+
   return (
     <div className="App">
       <Title />
       {!isAuthentified ? (
         <div className="Form">
-          <h2>Connexion</h2>
+          <Subtitle value="Connexion" />
           <Input
             type="text"
             name="username"
@@ -39,14 +45,15 @@ function App() {
             value={password}
             placeholder="Entrez le mot de passe"
           />
-          {loginError && <p className="red">{loginError}</p>}
+          {loginError !== "" && <ErrorMessage />}
           <Button type="login" value="Se connecter" />
         </div>
       ) : (
         <>
+          <Button type="logout" value="Se déconnecter" />
           {!results ? (
             <div className="Form">
-              <h2>Recherche</h2>
+              <Subtitle value="Recherche" />
               <Input
                 type="number"
                 name="id"

@@ -62,6 +62,12 @@ const defaultModel = {
         actions.loginFail(err);
       });
   }),
+  logout: action((state, payload) => {
+    state.loginError = "";
+    state.username = "";
+    state.password = "";
+    state.isAuthentified = false;
+  }),
   loginSuccess: action((state, payload) => {
     state.isAuthentified = true;
   }),

@@ -1,6 +1,6 @@
 import React from "react";
 
-function TItle() {
+function Title() {
   return (
     <div className="Title">
       <h1>React Exercice</h1>
@@ -8,4 +8,4 @@ function TItle() {
   );
 }
 
-export default TItle;
+export default Title;
