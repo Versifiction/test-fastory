@@ -16,12 +16,18 @@ server.route({
 
 server.route({
   method: "GET",
-  path: "/api/{type}/{id}",
+  path: "/api/{type}/{id}/{format?}",
   handler: async (request, h) => {
+    let url;
     const { swapi } = request.server.plugins["hapi-axios"];
-    const { data } = await swapi.get(
-      `${request.params.type}/${request.params.id}`
-    );
+
+    if (request.query.format === "wookiee") {
+      url = `${request.params.type}/${request.params.id}/?format=wookiee`;
+    } else {
+      url = `${request.params.type}/${request.params.id}`;
+    }
+
+    const { data } = await swapi.get(url);
 
     return h.response(data);
   },
