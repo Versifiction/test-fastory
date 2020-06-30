@@ -72,14 +72,21 @@ h1 {
   text-shadow: 1px 1px grey;
 }
 
+h2 {
+  text-transform: uppercase;
+  font-size: 3.5rem;
+  text-shadow: 1px 1px grey;
+}
+
 h1,
+h2,
 p {
   text-align: center;
   color: yellow;
 }
 
 p {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 input::placeholder {
@@ -186,4 +193,8 @@ button:active {
 .bold-desc {
   font-weight: bold;
   font-size: 2rem;
+}
+
+.red {
+  color: red;
 }

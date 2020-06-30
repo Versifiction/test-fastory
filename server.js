@@ -15,6 +15,28 @@ server.route({
 });
 
 server.route({
+  method: "POST",
+  path: "/api/login",
+  options: {
+    plugins: {
+      body: { merge: false, sanitizer: { stripNullorEmpty: false } },
+    },
+    handler: function (request, h) {
+      if (
+        request.payload.payload.username === "Luke" &&
+        request.payload.payload.password === "DadSucks"
+      ) {
+        return h.response({ message: "Authentifié" });
+      } else {
+        return h.response({
+          message: "Veuillez rentrer les bons identifiants",
+        });
+      }
+    },
+  },
+});
+
+server.route({
   method: "GET",
   path: "/api/{type}/{id}/{format?}",
   handler: async (request, h) => {

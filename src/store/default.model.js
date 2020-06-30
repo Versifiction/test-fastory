@@ -3,6 +3,9 @@ import axios from "axios";
 
 const defaultModel = {
   isAuthentified: false,
+  username: "",
+  password: "",
+  loginError: "",
   inputValue: "1",
   selectTypeValue: "films",
   inWookie: "false",
@@ -15,8 +18,6 @@ const defaultModel = {
     } else {
       url = `http://localhost:8000/api/${payload.selectTypeValue}/${payload.inputValue}/?format=wookiee`;
     }
-
-    console.log("url ", url);
 
     await axios
       .get(url)
@@ -32,14 +33,40 @@ const defaultModel = {
   resetSearch: action((state, payload) => {
     state.results = null;
   }),
-  inputChange: action((state, payload) => {
+  inputTypeChange: action((state, payload) => {
     state.inputValue = payload;
+  }),
+  usernameChange: action((state, payload) => {
+    state.username = payload;
+  }),
+  passwordChange: action((state, payload) => {
+    state.password = payload;
   }),
   selectTypeChange: action((state, payload) => {
     state.selectTypeValue = payload;
   }),
   toggleWookie: action((state, payload) => {
     state.inWookie = payload;
+  }),
+  login: thunk(async (actions, payload) => {
+    await axios
+      .post("http://localhost:8000/api/login", { payload })
+      .then((response) => {
+        if (response.data.message === "Authentifié") {
+          actions.loginSuccess(response.data.message);
+        } else {
+          actions.loginFail(response.data.message);
+        }
+      })
+      .catch((err) => {
+        actions.loginFail(err);
+      });
+  }),
+  loginSuccess: action((state, payload) => {
+    state.isAuthentified = true;
+  }),
+  loginFail: action((state, payload) => {
+    state.loginError = payload;
   }),
 };
 
