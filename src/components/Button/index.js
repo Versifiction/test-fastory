@@ -1,14 +1,18 @@
 import React from "react";
-import { useStoreActions } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 function Button() {
+  const inputValue = useStoreState((state) => state.defaultModel.inputValue);
+  const selectValue = useStoreState((state) => state.defaultModel.selectValue);
   const getResults = useStoreActions(
     (actions) => actions.defaultModel.getResults
   );
 
   return (
     <div className="Button">
-      <button onClick={getResults}>Rechercher</button>
+      <button onClick={() => getResults({ selectValue, inputValue })}>
+        Rechercher
+      </button>
     </div>
   );
 }
