@@ -15,6 +15,7 @@ import "./App.css";
 
 function App() {
   const results = useStoreState((state) => state.defaultModel.results);
+  const resultsType = useStoreState((state) => state.defaultModel.resultsType);
   const selectTypeValue = useStoreState(
     (state) => state.defaultModel.selectTypeValue
   );
@@ -24,10 +25,17 @@ function App() {
     (state) => state.defaultModel.isAuthentified
   );
   const loginError = useStoreState((state) => state.defaultModel.loginError);
+  const resultsError = useStoreState(
+    (state) => state.defaultModel.resultsError
+  );
 
   useEffect(() => {
     M.AutoInit();
   });
+
+  useEffect(() => {
+    console.log("res ", resultsType);
+  }, [resultsType]);
 
   return (
     <div className="App">
@@ -57,6 +65,10 @@ function App() {
             {!results ? (
               <div className="Form">
                 <Subtitle value="Recherche" />
+                <p>
+                  Veuillez renseigner tous les champs ci-dessous afin
+                  d'effectuer la recherche
+                </p>
                 <Input
                   type="number"
                   name="id"
@@ -65,11 +77,19 @@ function App() {
                 />
                 <Select type="type" />
                 <Select type="wookie" />
+                {resultsError && (
+                  <div className="Results-Error">
+                    <p className="color-red">{resultsError}</p>
+                  </div>
+                )}
                 <Button type="search" value="Rechercher" />
               </div>
             ) : (
-              <Results />
-            )}{" "}
+              <>
+                {" "}
+                <Results />
+              </>
+            )}
           </>
         )}
 

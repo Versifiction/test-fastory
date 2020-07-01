@@ -1,11 +1,13 @@
 const Hapi = require("hapi");
 const HapiAxios = require("hapi-axios");
 
+// Serveur mis sur le port 8000
 const server = Hapi.server({
   host: "localhost",
   port: 8000,
 });
 
+// Route root qui renvoie Hello World
 server.route({
   method: "GET",
   path: "/",
@@ -14,6 +16,7 @@ server.route({
   },
 });
 
+// Route qui permet à l'utilisateur de s'authentifier
 server.route({
   method: "POST",
   path: "/api/login",
@@ -22,7 +25,6 @@ server.route({
       body: { merge: false, sanitizer: { stripNullorEmpty: false } },
     },
     handler: function (request, h) {
-      console.log("pay ", request.payload.payload);
       if (
         request.payload.payload.username === "Luke" &&
         request.payload.payload.password === "DadSucks"
@@ -37,6 +39,8 @@ server.route({
   },
 });
 
+// Route qui renvoie les données de l'API pour une ressource avec un ID précis
+// Ex: http://localhost:8000/api/people/1 qui renvoie le véhicule avec l'ID 1
 server.route({
   method: "GET",
   path: "/api/{type}/{id}/{format?}",
@@ -60,6 +64,9 @@ server.route({
   },
 });
 
+// Route qui renvoie les données de l'API pour une ressource globale
+// Ex: http://localhost:8000/api/list/people/?page=1 qui renvoie tous les personnages
+// (Attention: Bien ajouter le /list après le /api)
 server.route({
   method: "GET",
   path: "/api/list/{type}/{page?}",
@@ -79,6 +86,7 @@ server.route({
   },
 });
 
+// Config du module hapi-axios qui permet d'effectuer des requêtes depuis le serveur
 async function hapiAxiosConfig() {
   try {
     await server.register({
@@ -99,6 +107,7 @@ async function hapiAxiosConfig() {
   }
 }
 
+// Fonction qui démarre le serveur, et règle les souci de CORS en acceptant les requêtes qui viennent du client avec le package hapi-cors
 async function start() {
   try {
     await server.register({
@@ -117,5 +126,6 @@ async function start() {
   console.log(`Le serveur tourne sur le port ${server.info.uri}`);
 }
 
+// Exécution des fonctions start et hapiAxiosConfig
 start();
 hapiAxiosConfig();

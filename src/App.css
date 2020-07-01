@@ -229,3 +229,17 @@ nav {
 .card-content {
   height: 275px;
 }
+
+.results-number {
+  color: yellow;
+  font-size: 2rem;
+}
+
+.inherit-p {
+  color: inherit;
+  text-align: inherit;
+}
+
+#slide-out {
+  padding: 10px;
+}

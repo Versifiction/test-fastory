@@ -10,6 +10,9 @@ const defaultModel = {
   selectTypeValue: "films",
   inWookie: "false",
   results: null,
+  resultsType: null,
+  resultsError: null,
+  url: "",
   activePage: 1,
   getResults: thunk(async (actions, payload) => {
     let url;
@@ -29,18 +32,35 @@ const defaultModel = {
     await axios
       .get(url)
       .then((response) => {
-        console.log(response.data);
-        actions.setResults(response.data);
+        actions.setResults({ data: response.data, url });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log("err ", err);
+        actions.setResultsError(
+          "La recherche n'a pas pu aboutir, merci de vérifier que l'ID que vous avez rentré est bien répertorié pour le type de ressource choisi !"
+        );
+      });
   }),
   setResults: action((state, payload) => {
-    state.results = payload;
-    state.inWookie = "false";
+    state.resultsError = null;
+    state.results = payload.data;
     state.inputValue = "";
+    if (payload.url.includes("list")) {
+      state.resultsType = "array";
+    } else {
+      state.resultsType = "object";
+    }
+  }),
+  setResultsError: action((state, payload) => {
+    state.resultsError = payload;
+    console.log(state.resultsError);
   }),
   resetSearch: action((state, payload) => {
+    state.inWookie = "false";
+    state.selectTypeValue = "films";
     state.results = null;
+    state.resultsError = null;
+    state.resultsType = "";
   }),
   inputTypeChange: action((state, payload) => {
     state.inputValue = payload;
@@ -78,7 +98,10 @@ const defaultModel = {
     state.loginError = "";
     state.username = "";
     state.password = "";
-    state.results = "";
+    state.results = null;
+    state.resultsType = "";
+    state.resultsError = null;
+    state.selectTypeValue = "films";
     state.isAuthentified = false;
   }),
   loginSuccess: action((state, payload) => {

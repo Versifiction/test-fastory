@@ -1,4 +1,5 @@
 import React from "react";
+import classnames from "classnames";
 import { useStoreState, useStoreActions } from "easy-peasy";
 
 function Button(props) {
@@ -23,7 +24,10 @@ function Button(props) {
     <div className="Button">
       {props.type === "search" && (
         <button
-          className="btn-large"
+          className={classnames(
+            { disabled: !inputValue || !selectTypeValue },
+            "btn-large"
+          )}
           onClick={() =>
             getResults({ selectTypeValue, inputValue, inWookie, activePage })
           }
