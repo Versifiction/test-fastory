@@ -16,8 +16,6 @@ function Results() {
   useEffect(() => {
     setWookieKeys(Object.keys(results));
     setWookieValues(Object.values(results));
-    console.log("keys ", wookieKeys);
-    console.log("values ", wookieValues);
   }, [results]);
 
   return (
@@ -30,18 +28,6 @@ function Results() {
                 <span className="bold-desc">{w}</span>: {wookieValues[index]}
               </p>
             ))}
-          {/* <p className="bold">{results.whrascwo}</p>
-          <p>
-            <span className="bold-desc">acwoahrracao:</span>{" "}
-            {results.acwoahrracao}
-          </p>
-          <p>
-            <span className="bold-desc">scracc:</span> {results.scracc}
-          </p>
-          <p>
-            <span className="bold-desc">acraahrc_oaooanoorc:</span>{" "}
-            {results.acraahrc_oaooanoorc}
-          </p> */}
         </>
       )}
       {selectTypeValue === "planets" && !inWookie && (

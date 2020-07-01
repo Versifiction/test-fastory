@@ -33,10 +33,6 @@ function App() {
     M.AutoInit();
   });
 
-  useEffect(() => {
-    console.log("res ", resultsType);
-  }, [resultsType]);
-
   return (
     <div className="App">
       <Nav />

@@ -2,6 +2,7 @@ import { persist, action, thunk } from "easy-peasy";
 import axios from "axios";
 
 const defaultModel = {
+  // State global initial de l'application
   isAuthentified: false,
   username: "",
   password: "",
@@ -17,6 +18,7 @@ const defaultModel = {
   getResults: thunk(async (actions, payload) => {
     let url;
 
+    // on définit l'url sur laquelle les requêtes seront faites, en fonction de si le format est wookie ou normal, et si un ID est présent
     if (payload.inWookie === "false" && payload.inputValue) {
       url = `http://localhost:8000/api/${payload.selectTypeValue}/${payload.inputValue}`;
     } else if (payload.inWookie === "false" && !payload.inputValue) {
@@ -27,8 +29,7 @@ const defaultModel = {
       url = `http://localhost:8000/api/${payload.selectTypeValue}/${payload.inputValue}/?format=wookiee`;
     }
 
-    console.log("url ", url);
-
+    // requête sur le serveur avec l'url définie précédemment
     await axios
       .get(url)
       .then((response) => {
@@ -53,9 +54,9 @@ const defaultModel = {
   }),
   setResultsError: action((state, payload) => {
     state.resultsError = payload;
-    console.log(state.resultsError);
   }),
   resetSearch: action((state, payload) => {
+    // lorsqu'un user veut faire une nouvelle recherche, on réinitialise certaines données
     state.inWookie = "false";
     state.selectTypeValue = "films";
     state.results = null;
@@ -85,8 +86,10 @@ const defaultModel = {
       .post("http://localhost:8000/api/login", { payload })
       .then((response) => {
         if (response.data.message === "Authentifié") {
+          // si le message renvoyé par le serveur est "Authentifié", alors l'utilisateur est authentifié
           actions.loginSuccess(response.data.message);
         } else {
+          // sinon un message d'erreur apparaît
           actions.loginFail(response.data.message);
         }
       })
@@ -95,6 +98,7 @@ const defaultModel = {
       });
   }),
   logout: action((state, payload) => {
+    // à la déconnexion, on réinitialise tout
     state.loginError = "";
     state.username = "";
     state.password = "";
