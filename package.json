@@ -15,7 +15,7 @@
     "hapi-bodyparser": "^2.1.2",
     "hapi-cors": "^1.0.3",
     "materialize-css": "^1.0.0-rc.2",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
